@@ -6,8 +6,8 @@
 #define pass "PSD@85416346"
 #define logiZ906 "Logitech-Z906"
 
-const int buttonPin = 1;                // the number of the pushbutton pin
-const int relayPin =  2;                // the number of the LED pin
+const int buttonPin = 5;                // the number of the PUSHBUTTON pin
+const int relayPin =  4;                // the number of the RELAY pin
 
 // variables will change:
 int buttonState = 0;                    // variable for reading the pushbutton status
@@ -24,7 +24,7 @@ void wifi() {
 
 void setup() {
   wifi();
-  pinMode(relayPin, OUTPUT);            // initialize the LED pin as an output:
+  pinMode(relayPin, OUTPUT);            // initialize the relayPin pin as an output:
   pinMode(buttonPin, INPUT);            // initialize the pushbutton pin as an input:
   fauxmo.createServer(true);
   fauxmo.setPort(80);
@@ -36,15 +36,13 @@ void setup() {
     if (strcmp(device_name, logiZ906) == 0) {
       if (state) {
         commandChange(1);
-      } else if (!state) {
-        commandChange(1);
       }
     }
   });
 }
 
 void loop() {
-  //fauxmo.handle();
+  fauxmo.handle();
   buttonState = digitalRead(buttonPin);
   if (buttonState == HIGH) {
     commandChange(1);
