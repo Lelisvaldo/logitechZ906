@@ -57,13 +57,16 @@ void loop() {
   else if (alexaState != alexa) {
     commandChange();
     alexaState = !alexaState;
+    if(estadoHome == 0){
+      fauxmo.setState(logiZ906, false, 0);
+    }else{
+      fauxmo.setState(logiZ906, true, 255);
+    }
   }
 }
 
 void commandChange() {
   digitalWrite(relayPin, HIGH);
-  fauxmo.setState(logiZ906, true, 255);
   delay(500);
   digitalWrite(relayPin, LOW);
-  fauxmo.setState(logiZ906, false, 0);
 }
